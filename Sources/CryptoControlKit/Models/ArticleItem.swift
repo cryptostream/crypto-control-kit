@@ -20,5 +20,5 @@ public struct ArticleItem: Codable {
     public let words: Int
     public let similarArticles: [SimliarArticle]
     public let coins: [Coin]
-    public let publishedAt: Date
+    public let publishedAt: String
 }

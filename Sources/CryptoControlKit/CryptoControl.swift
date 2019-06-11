@@ -31,19 +31,25 @@ public final class CryptoControl {
                 do {
                     switch endpoint.responseModel {
                     // Articles
-                    case .articles(let type): completion(.success(try self.decoder.decode(type, from: data)))
-                        
+                    case .news(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
+                    case .newsCategory(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
                     // Reddit
-                    case .reddit(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .reddit(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
                         
                     // Tweets
-                    case .tweets(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .tweets(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
                         
                     // Feed
-                    case .feed(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .feed(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
                         
                     // Coin Details
-                    case .coinDetails(let type): completion(.success(try self.decoder.decode(type, from: data)))
+                    case .coinDetails(let type):
+                        completion(.success(try self.decoder.decode(type, from: data)))
                     }
                     
                 } catch {

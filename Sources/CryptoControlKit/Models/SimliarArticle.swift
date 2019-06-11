@@ -11,5 +11,5 @@ public struct SimliarArticle: Codable {
     public let title: String
     public let _id: String
     public let url: String
-    public let publishedAt: Date
+    public let publishedAt: String
 }

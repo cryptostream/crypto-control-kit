@@ -12,7 +12,7 @@ public struct TweetItem: Codable {
     public let text: String
     public let username: String
     public let id: String
-    public let publishedAt: Date
+    public let publishedAt: String
     public let isRetweeted: Bool
     public let retweetCount: Int
     public let favouriteCount: Int

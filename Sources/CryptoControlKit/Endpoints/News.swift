@@ -8,20 +8,20 @@
 import Foundation
 
 enum News {
-    case articles(category: Category? = nil, token: String? = nil, latest: Bool? = nil, language: Locale? = nil,  sentiment: Bool? = nil)
+    case news(token: String? = nil, latest: Bool? = nil, language: Locale? = nil,  sentiment: Bool? = nil)
+    case newsCategory(token: String? = nil)
     
     var path: String {
         switch self {
-        case .articles(let category, let token, _, _, _):
-            switch (category, token) {
-            case (.some(let c), .none):
-                return "/api/v1/public/news/\(c)"
-            case (.none, .some(let t)):
-                return "/api/v1/public/news/coin/\(t)"
-            case (.some(let c), .some(let t)):
-                return "/api/v1/public/news/coin/\(t)/\(c)"
-            default:
-                return "/api/v1/public/news"
+        case .news(let token, _, _, _):
+            switch token {
+            case .some(let t): return "/api/v1/public/news/coin/\(t)"
+            case .none: return "/api/v1/public/news"
+            }
+        case .newsCategory(let token):
+            switch token {
+            case .some(let t): return "/api/v1/public/news/coin/\(t)/category"
+            case .none: return "/api/v1/public/news/category"
             }
         }
     }
@@ -30,7 +30,7 @@ enum News {
         var queryItems = [URLQueryItem]()
         
         switch self {
-        case .articles(_, _, let latest, let language, let sentiment):
+        case .news(_, let latest, let language, let sentiment):
             latest.flatMap {
                 queryItems.append(URLQueryItem(name: "latest", value: $0.description))
             }
@@ -40,6 +40,7 @@ enum News {
             sentiment.flatMap {
                 queryItems.append(URLQueryItem(name: "sentiment", value: $0.description))
             }
+        case .newsCategory: break
         }
         
         return queryItems
@@ -47,7 +48,8 @@ enum News {
     
     var model: ResponseModel {
         switch self {
-        case .articles: return .articles([ArticleItem].self)
+        case .news: return .news([ArticleItem].self)
+        case .newsCategory: return .newsCategory(Category.self)
         }
     }
 }

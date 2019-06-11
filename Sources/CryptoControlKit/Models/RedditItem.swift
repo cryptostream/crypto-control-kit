@@ -16,7 +16,7 @@ public struct RedditItem: Codable {
     public let downvotes: Int
     public let description: String
     public let id: String
-    public let publishedAt: Date
+    public let publishedAt: String
     public let subreddit: String
     public let title: String
     public let url: String

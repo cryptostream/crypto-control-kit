@@ -9,8 +9,9 @@ import Foundation
 
 public enum ResponseModel {
     // News
-    case articles([ArticleItem].Type)
-    
+    case news([ArticleItem].Type)
+    case newsCategory(Category.Type)
+
     // Reddit
     case reddit([RedditItem].Type)
     
@@ -22,6 +23,4 @@ public enum ResponseModel {
     
     // Coin Details
     case coinDetails(DetailsItem.Type)
-
-
 }
